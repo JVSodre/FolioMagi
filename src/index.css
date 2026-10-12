@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Almendra+SC&family=Bebas+Neue&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Staatliches&family=Uncial+Antiqua&display=swap');
+
+@import "tailwindcss";
+
+@theme{
+    --font-almendra: "Almendra SC", serif;
+}
