@@ -25,11 +25,11 @@ export function FolioCard({ card }: FolioCardProps) {
   const y = useMotionValue(0)
 
   // Mapeia para graus de rotação 3D
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 })
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 })
+  const mouseXSpring = useSpring(x, { stiffness: 500, damping: 30 })
+  const mouseYSpring = useSpring(y, { stiffness: 500, damping: 30 })
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"])
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["30deg", "-30deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-30deg", "30deg"])
 
   // Gradiente dinâmico para simular o reflexo da luz
   const glareX = useTransform(mouseXSpring, [-0.5, 0.5], [0, 100])
@@ -65,7 +65,7 @@ export function FolioCard({ card }: FolioCardProps) {
             transformStyle: "preserve-3d",
             clipPath: "polygon(50% 0%, 100% 38%, 81% 100%, 19% 100%, 0% 38%)",
           }}
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.2 }}
           className="relative cursor-pointer w-60 md:w-64 select-none group transition-shadow duration-300 pointer-events-auto"
         >
           {/* Imagem da carta */}
