@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 
-// Interface flexível para suportar HP1, HP2 e HP3
 export interface FolioCardData {
   id: string
   number: number
@@ -15,23 +14,21 @@ export interface FolioCardData {
 
 interface FolioCardProps {
   card: FolioCardData
+  className?: string
 }
 
-export function FolioCard({ card }: FolioCardProps) {
+export function FolioCard({ card, className = '' }: FolioCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
-  // Posições x e y brutas do mouse
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
-  // Mapeia para graus de rotação 3D
   const mouseXSpring = useSpring(x, { stiffness: 500, damping: 30 })
   const mouseYSpring = useSpring(y, { stiffness: 500, damping: 30 })
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["30deg", "-30deg"])
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-30deg", "30deg"])
 
-  // Gradiente dinâmico para simular o reflexo da luz
   const glareX = useTransform(mouseXSpring, [-0.5, 0.5], [0, 100])
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], [0, 100])
 
@@ -52,7 +49,7 @@ export function FolioCard({ card }: FolioCardProps) {
   }
 
   return (
-    <div className="flex flex-col items-center group/container">
+    <div className={`relative z-0 hover:z-99 flex flex-col items-center group/container ${className}`}>
       {/* Container com perspectiva 3D da Animação */}
       <div className="perspective-[1000px]">
         <motion.div
