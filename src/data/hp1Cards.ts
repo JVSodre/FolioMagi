@@ -4,7 +4,7 @@ export const hp1Cards: FolioCardData[] = [
   {
     id: "hp1_1",
     number: 101,
-    name: "Album Dumbledore",
+    name: "Albus Dumbledore",
     category: "Wizard",
     rarity: "Gold",
     age: 0,
@@ -59,7 +59,7 @@ export const hp1Cards: FolioCardData[] = [
   {
     id: "hp1_6",
     number: 18,
-    name: "Uric, o Incomparável Crâneo",
+    name: "Uric, o Incomparável Crânio",
     category: "Wizard",
     rarity: "Gold",
     age: 0,

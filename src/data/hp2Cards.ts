@@ -843,7 +843,7 @@ export const hp2Cards: FolioCardData[] = [
   {
     id: "hp2_73",
     number: 17,
-    name: "Morgan le Fay",
+    name: "Morgana Le Fay",
     category: "Witch",
     rarity: "Silver",
     game: "hp2",

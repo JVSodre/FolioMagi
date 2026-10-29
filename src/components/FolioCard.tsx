@@ -69,6 +69,8 @@ export function FolioCard({ card, className = '' }: FolioCardProps) {
           <img
             src={card.imageUrl}
             alt={card.name}
+            loading='lazy'
+            decoding='async'
             className="w-full h-auto pointer-events-none block drop-shadow-[0_25px_15px_rgba(0,0,0,0.6)]"
           />
 

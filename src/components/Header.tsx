@@ -27,7 +27,7 @@ export function Header({ currentBg, currentButton, rarityCard, onSelectButton, o
         <div className="flex gap-3 md:gap-5 justify-center items-center text-amber-200">
           {/* Botão HP1 */}
           <div id="hp1button" className="flex items-center gap-3">
-            <button onClick={() => handleToggle('hp1button')}>
+            <button onClick={() => {handleToggle('hp1button'); if (rarityCard !== 'all' && rarityCard !== 'Gold') {onSelectRarity('all');}}}>
               <img 
                 src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598190/hp1_dumbledore_b.png" 
                 alt="Harry Potter 1" 
@@ -81,14 +81,14 @@ export function Header({ currentBg, currentButton, rarityCard, onSelectButton, o
         </div>
       </div>
 
-      <div className="w-full flex justify-end -mt-1">
+      <div className={`w-full flex justify-end -mt-1 ${currentButton == 'hp3button' ? 'hidden' : ''}`}>
         <div className={`flex justify-end px-5 py-4 gap-3 border-amber-500/20 border-b-2 border-l-2 rounded-bl-2xl ${currentBg.colorBg}`}>
 
             <img onClick={() => onSelectRarity('all')} className={`max-w-8 lg:max-w-10 h-auto hover:scale-120 transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1)] ${rarityCard.toLowerCase() == 'all' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `}  src="https://res.cloudinary.com/xcnmyr02/image/upload/v1793214130/FolioAll_2.png" alt="Folio Todos" />
 
-            <img onClick={() => onSelectRarity('Bronze')} className={`max-w-8 lg:max-w-10 h-auto hover:scale-120 transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1)] ${rarityCard.toLowerCase() == 'bronze' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598218/HP2FolioBronzeNormal.png" alt="Folio Bronze" />
+            <img onClick={() => currentButton != 'hp1button' && onSelectRarity('Bronze')} className={`${currentButton === 'hp1button' ? 'grayscale cursor-default hover:drop-shadow-none' : 'hover:scale-120'} max-w-8 lg:max-w-10 h-auto transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1)] ${rarityCard.toLowerCase() == 'bronze' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598218/HP2FolioBronzeNormal.png" alt="Folio Bronze" />
 
-            <img onClick={() => onSelectRarity('Silver')} className={`max-w-8 lg:max-w-10 h-auto hover:scale-120 transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1)] ${rarityCard.toLowerCase() == 'silver' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598219/HP2FolioSilverNormal.png" alt="Folio Prata" />
+            <img onClick={() => currentButton != 'hp1button' && onSelectRarity('Silver')} className={`${currentButton === 'hp1button' ? 'grayscale cursor-default hover:drop-shadow-none' : 'hover:scale-120'} max-w-8 lg:max-w-10 h-auto transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1)] ${rarityCard.toLowerCase() == 'silver' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598219/HP2FolioSilverNormal.png" alt="Folio Prata" />
 
             <img onClick={() => onSelectRarity('Gold')} className={`max-w-8 lg:max-w-10 h-auto hover:scale-120 transition-transform hover:drop-shadow-[0_0_3px_rgba(251,191,36,1) ${rarityCard.toLowerCase() == 'gold' ? 'drop-shadow-[0_0_3px_rgba(251,191,36,1)]! opacity-100!' : ''} `} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598218/HP2FolioGoldNormal.png" alt="Folio Ouro" />
         </div>

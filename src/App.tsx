@@ -13,7 +13,8 @@ export default function App() {
   const [rarityCard, setRarityCard] = useState('all')
   const [currentGrid, setCurrentGrid] = useState('lg:grid-cols-8')
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
-  const [currentButton, setCurrentButton] = useState('hp1button')
+  const [currentButton, setCurrentButton] = useState('')
+  const [isBgButtonHovered, setIsBgButtonHovered] = useState(false)
 
   const cardsByGame: Record<string, FolioCardData[]> = {
     hp1button: hp1Cards,
@@ -32,14 +33,14 @@ export default function App() {
     {
       id: 'hp3ai',
       url: 'https://res.cloudinary.com/xcnmyr02/image/upload/v1791781917/Desktop_-_1_1.png',
-      colorBg: 'bg-[#341616]',
+      colorBg: 'bg-[#341616]/95',
       lastBg: 'bg-[#292111]',
       textColor: 'text-amber-200',
     },
     {
       id: 'hp1ai',
       url: 'https://res.cloudinary.com/xcnmyr02/image/upload/v1791776025/Gemini_Generated_Image_vakm97vakm97vakm_1.png',
-      colorBg: 'bg-[#292111]',
+      colorBg: 'bg-[#292111]/95',
       lastBg: 'bg-[#292111]',
       textColor: 'text-amber-200',
       paddingBg: 'lg:pr-60',
@@ -47,14 +48,14 @@ export default function App() {
     {
       id: 'hp3scale',
       url: 'https://res.cloudinary.com/xcnmyr02/image/upload/v1791781906/Desktop_-_1.png',
-      colorBg: 'bg-[#3a2f19]',
+      colorBg: 'bg-[#3a2f19]/95',
       lastBg: 'bg-[#292111]',
       textColor: 'text-amber-200',
     },
     {
       id: 'hp1reconstructed',
       url: 'https://res.cloudinary.com/xcnmyr02/image/upload/v1791776019/Frame_1.png',
-      colorBg: 'bg-[#3a2f19]',
+      colorBg: 'bg-[#3a2f19]/95',
       lastBg: 'bg-[#292111]',
       textColor: 'text-amber-200',
       paddingBg: 'lg:pr-60',
@@ -85,6 +86,8 @@ export default function App() {
     return 0;
   });   
 
+  const testCard = hp2Cards.find((card) => card.id === 'hp2_56')
+
 
   const [hoveredCard, setHoveredCard] = useState<FolioCardData | null>(null);
 
@@ -98,8 +101,41 @@ export default function App() {
         onSelectButton={setCurrentButton}
         onSelectRarity={setRarityCard} ></Header>
 
+      <div className={` hidden fixed z-500 ${currentBg.colorBg}  w-screen h-screen justify-center items-center flex`}>
+        <div className='bg-black/50 absolute w-full h-full flex items-center justify-center'></div>
+        <div className='flex flex-col lg:grid grid-cols-2 h-fit gap-10 items-center'>
+          <div className='flex z-999 items-center justify-end'>
+            <img src={testCard?.imageUrl} className='w-100 drop-shadow-amber-200/30 drop-shadow-xl' alt="" />
+          </div>
+          <div className='text-amber-200 text-2xl justify-start h-full mt-30 font-almendra z-999'>
+            <div className='w-full justify-end flex'>
+            <img className='w-10 h-10 -mt-10 -mr-10 drop-shadow-amber-200/50 drop-shadow-sm hover:drop-shadow-amber-200 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598267/hp3_quit_off.png" alt="" />
+            </div>
+            <h1 className='text-6xl'>{testCard?.name}</h1>
+            <h2>{testCard?.age} - {testCard?.died}</h2>
+          </div>
+        </div>
+      </div>
+
       {/* Grelha de Cartas */}
-      {cardsToDisplay.length === 0 ? (
+      {currentButton === 'hp3button' ? (
+        <div className="min-h-screen flex flex-col items-center justify-center p-4">
+          <h1 className='text-amber-200 text-4xl font-almendra drop-shadow-amber-200 drop-shadow-sm'>Em construção</h1>
+          <div className={`grid mt-13 grid-cols-1 sm:grid-cols-2 ${currentGrid} md:px-10 lg:px-50 ${currentBg.paddingBg ?? ''} gap-5 lg:gap-8 justify-items-center`}>
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598222/hp3_card_wi.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598222/hp3_card_wi2.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598222/hp3_card_wz.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598221/hp3_card_qu.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598221/hp3_card_vp.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598221/hp3_card_hg.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598232/hp3_card_gi.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598220/hp3_card_gb.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598220/hp3_card_dr.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598220/hp3_card_be.png" alt="" />
+            <img className='hover:scale-150 transition-all' src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598220/hp3_card_bo.png" alt="" />
+          </div>
+        </div>
+      ) : cardsToDisplay.length === 0 ? (
         <div className="min-h-screen flex items-center justify-center p-4">
           <div className={`flex flex-col items-center justify-center text-center p-12 ${currentBg.colorBg} backdrop-blur-md rounded-xl border border-amber-500/20 gap-3`}>
             <p className="font-almendra text-5xl text-amber-200 mb-2">
@@ -128,12 +164,17 @@ export default function App() {
       {/* Rodapé Fixo */}
       <footer className={`${currentBg.colorBg} backdrop-blur-lg text-stone-300 z-999 text-xs gap-10 py-5 px-6 fixed bottom-0 left-0 w-full border-t border-amber-500/20 shadow-lg grid grid-cols-3 items-center justify-between`}>
         <button className="md:pl-0 flex justify-start items-center cursor-pointer">
-          <img onClick={toggleBackground} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598219/HP2MenuBackToGame.png" alt="Icone para trocar fundo da página" className="max-w-15 lg:max-w-20 h-auto hover:scale-105 active:scale-95 transition-transform focus:outline-none"/>
+          <img        
+          onMouseEnter={() => setIsBgButtonHovered(true)} 
+          onMouseLeave={() => setIsBgButtonHovered(false)} 
+          onClick={toggleBackground} src="https://res.cloudinary.com/xcnmyr02/image/upload/v1791598219/HP2MenuBackToGame.png" alt="Icone para trocar fundo da página" className="max-w-15 lg:max-w-20 h-auto hover:scale-105 active:scale-95 transition-transform focus:outline-none"/>
         </button>
         <div>
-          {hoveredCard && (
+          {hoveredCard ? (
             <h1 className='flex justify-center text-center font-arial drop-shadow-amber-200/50 drop-shadow-md text-amber-200 text-2xl'>"{hoveredCard.name}"</h1>
-          )}
+          ) : isBgButtonHovered ? (
+            <h1 className='flex justify-center text-center font-arial drop-shadow-amber-200/50 drop-shadow-md text-amber-200 text-2xl' >Trocar Plano de Fundo</h1>
+            ) : null}
         </div>
         <div className="md:pl-0 flex justify-end items-center">
           {/* USANDO setIsOptionsOpen PARA ABRIR/FECHAR AO CLICAR NO ÍCONE DO RODAPÉ */}

@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react"
+
 interface OptionsProps {
   className?: string
   currentBg: {
@@ -12,8 +14,27 @@ interface OptionsProps {
 }
 
 export function Options({ className = '', currentBg, currentGrid, sortBy, onSortChange, onGridChange, onClose }: OptionsProps) {
+  
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent){
+      if(
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        onClose?.()
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [onClose])
+  
   return (
-    <div className={`${currentBg.colorBg} ${currentBg.textColor} ${className} backdrop-blur-md w-full flex flex-col gap-4 lg:rounded-br-xl ring-amber-500/40 ring-2 shadow-2xl`}>
+    <div ref={containerRef} className={`${currentBg.colorBg} ${currentBg.textColor} ${className} transition-all backdrop-blur-md w-full flex flex-col gap-4 lg:rounded-br-xl ring-amber-500/40 ring-2 shadow-2xl`}>
       <header className="flex flex-col">
         <div className="grid grid-cols-2 px-7 lg:px-8 py-4 w-full bg-black/30 items-center text-2xl">
           <div className="w-full flex">
@@ -86,9 +107,21 @@ export function Options({ className = '', currentBg, currentGrid, sortBy, onSort
 
       <hr className="hidden md:block lg:block border-amber-500/40"/>
 
+      <section className="px-7 pb-2">
+        <div className="p-2 gap-4 flex flex-col">
+          <h1 className="font-bold italic text-amber-200/80">Mostrar Cards repetidos</h1>
+          <div className="flex flex-col gap-4 pt-2">
+            <button className="ring-amber-200/80 ring-1 hover:ring-2 hover:font-bold bg-black/30 rounded-md p-2">Mostrar Todos</button>
+            <button className="ring-amber-200/80 ring-2 hover:ring-2 hover:font-bold bg-black/20 shadow-md shadow-amber-200 rounded-md p-2">Esconder a raridade menor</button>
+          </div>
+        </div>
+      </section>
+
+            <hr className="hidden md:block lg:block border-amber-500/40"/>
+
       <section className="px-7 pb-9">
         <div className="p-2 gap-4 flex flex-col">
-          <h1 className="font-bold italic text-amber-200/80">Mostrar Cards HP3 nos filtros</h1>
+          <h1 className="font-bold italic text-amber-200/80">Mostrar HP3 Cards no conjunto</h1>
           <div className="grid grid-cols-2 gap-2 pt-2">
             <button className="ring-amber-200/80 ring-2 hover:ring-2 hover:font-bold bg-black/20 shadow-md shadow-amber-200 rounded-md p-2">Esconder</button>
             <button className="ring-amber-200/80 ring-1 hover:ring-2 hover:font-bold bg-black/30 rounded-md p-2">Mostrar</button>
